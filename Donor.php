@@ -6,7 +6,11 @@ class Donor extends AbstractIndividual
     {
         parent::__construct($email,  $password,  $mobile,  $firstName,  $lastName,  $SSN,  $gender);
     }
-    public function addDonation(Donation $donation) {
 
+    public function addDonation(Donation $donation)
+    {
+        $donation->setDonor($this);
+        $donation->addObserver(new SMSNotifier($this));
+        $donation->addObserver(new EmailNotifier($this));
     }
 }

@@ -14,4 +14,20 @@ abstract class AbstractUser
         $this->password = $password;
         $this->mobile = $mobile;
     }
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    public function getAddress()
+    {
+        return $this->address;
+    }
+    public function getDonations()
+    {
+        return $this->donations;
+    }
+    public function getMobile()
+    {
+        return $this->mobile;
+    }
 }

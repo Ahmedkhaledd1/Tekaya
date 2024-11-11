@@ -1,4 +1,5 @@
 <?php
+require_once 'FoodSetDecorator.php';
     class Meat extends FoodSetDecorator{
 
         public function __construct(FoodSet $foodSet)

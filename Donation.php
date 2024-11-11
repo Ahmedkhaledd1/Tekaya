@@ -1,4 +1,5 @@
 <?php
+require_once 'SubjectInterface.php';
 class Donation implements SubjectInterface
 {
     private string $title;
@@ -66,5 +67,10 @@ class Donation implements SubjectInterface
         foreach ($this->observers as $ob) {
             $ob->update($this);
         }
+    }
+
+    public function __toString()
+    {
+        return "Title: ". $this->title ."\n email:" . $this->donor->getEmail() . "\nbenefec: " . $this->benefeciary->getEmail() . "\n strat: " . $this->strategy;
     }
 }

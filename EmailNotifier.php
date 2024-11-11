@@ -1,4 +1,6 @@
 <?php
+require_once 'AbstractNotifier.php';
+require_once 'ObserverInterface.php';
 class EmailNotifier extends AbstractNotifier implements ObserverInterface
 {
     private string $details;

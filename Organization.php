@@ -1,4 +1,5 @@
 <?php
+require_once 'AbstractUser.php';
 class Organization extends AbstractUser
 {
     private string $title;

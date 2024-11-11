@@ -1,4 +1,8 @@
 <?php
+
+require_once 'AbstractIndividual.php';
+require_once 'SMSNotifier.php';
+require_once 'EmailNotifier.php';
 class Donor extends AbstractIndividual
 {
 

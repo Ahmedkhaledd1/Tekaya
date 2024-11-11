@@ -1,4 +1,5 @@
 <?php
+require_once 'AbstractUser.php';
 abstract class AbstractIndividual extends AbstractUser
 {
     private string $firstName;

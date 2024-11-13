@@ -1,6 +1,6 @@
 <?php
 require_once 'FoodSetDecorator.php';
-class Chicken extends FoodSetDecorator
+class Meat extends FoodSetDecorator
 {
 
     public function __construct(FoodSet $foodSet,float $price)

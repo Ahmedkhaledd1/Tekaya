@@ -13,8 +13,7 @@ abstract class FoodSet implements DonationStrategyInterface{
         if ($this->expirationDate > $currentDate) return false;
         return $benefeciary->confirmReceivedDonation($donation);
     }
-
-    
+    public abstract function getCost():int;
 
 }
 

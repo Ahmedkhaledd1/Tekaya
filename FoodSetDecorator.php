@@ -4,10 +4,10 @@ require_once 'FoodSet.php';
             protected FoodSet $foodset;
             
         
-            abstract public function getCost():int ;
-            abstract public function setFoodSet ():bool;
-            abstract public function updataFoodSetCost(float $price):bool;
-            abstract public function deleteFoodItem():bool;
+            
+            
+            abstract public function updataItemCost(float $price):bool;
+        
             public function getItems():string{
             
             

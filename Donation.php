@@ -2,16 +2,16 @@
 require_once 'SubjectInterface.php';
 class Donation implements SubjectInterface
 {
-    private string $title;
+    private int $donationId;
     private Benefeciary $benefeciary;
     private AbstractUser $donor;
     private DonationStrategyInterface $strategy;
     private bool $confirmReceived;
     private array $observers = [];
 
-    public function __construct(string $title)
+    public function __construct(int $id)
     {
-        $this->title = $title;
+        $this-> donationId= $id;
     }
 
     public function setDonationStrategy(DonationStrategyInterface $strategy): bool
@@ -71,6 +71,6 @@ class Donation implements SubjectInterface
 
     public function __toString()
     {
-        return "Title: ". $this->title ."\n email:" . $this->donor->getEmail() . "\nbenefec: " . $this->benefeciary->getEmail() . "\n strat: " . $this->strategy;
+        return "Donation Id: ". $this->donationId ."\n email:" . $this->donor->getEmail() . "\nbenefec: " . $this->benefeciary->getEmail() . "\n strat: " . $this->strategy;
     }
 }

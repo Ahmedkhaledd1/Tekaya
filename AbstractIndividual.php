@@ -2,10 +2,10 @@
 require_once 'AbstractUser.php';
 abstract class AbstractIndividual extends AbstractUser
 {
-    private string $firstName;
-    private string $lastName;
-    private string $SSN;
-    private bool $gender;
+    protected string $firstName;
+    protected string $lastName;
+    protected string $SSN;
+    protected bool $gender;
 
     public function __construct(string $email, string $password, string $mobile, string $firstName, string $lastName, string $SSN, bool $gender)
     {

@@ -1,7 +1,7 @@
 <?php
 abstract class AbstractNotifier
 {
-    private AbstractUser $user;
+    protected AbstractUser $user;
 
     public function __construct(AbstractUser $user)
     {

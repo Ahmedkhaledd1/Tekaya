@@ -1,12 +1,12 @@
 <?php
 abstract class AbstractUser
 {
-    private string $id;
-    private string $email;
-    private string $password;
-    private Address $address;
-    private array $donations = [];
-    private string $mobile;
+    protected string $id;
+    protected string $email;
+    protected string $password;
+    protected Address $address;
+    protected array $donations = [];
+    protected string $mobile;
 
     public function __construct(string $email, string $password, string $mobile)
     {

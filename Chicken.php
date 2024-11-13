@@ -3,33 +3,33 @@ require_once 'FoodSetDecorator.php';
 class Chicken extends FoodSetDecorator
 {
 
-    public function __construct(FoodSet $foodSet)
+    public function __construct(FoodSet $foodSet,float $price)
     {
         $this->foodset = $foodSet;
+        $this->description="chicken";
+        $this->cost=$price;
     }
 
-    public function setFoodSet(): bool
+
+    public function updataItemCost(float $price): bool
     {
-        $this->foodset->basicFoodSet[] = "Chicken";
+
+        $this->cost=$price;
+        
         return true;
     }
 
-    public function deleteFoodItem(): bool
-    {
-        $this->foodset->basicFoodSet = array_diff($this->foodset->basicFoodSet, ["Chicken"]);
-        return true;
-    }
-    public function updataFoodSetCost(float $price): bool
-    {
-
-        $count = array_count_values($this->foodset->basicFoodSet);
-        $this->cost = $this->foodset->cost + ($count["Chicken"] ?? 0) * 50;
-        return true;
-    }
     public function getCost(): int
     {
 
 
-        return $this->cost;
+        return  $this->foodset->getCost()+$this->cost;
+    }
+
+
+    public function getItems(): string
+    {
+        return $this->foodset->getItems() . ", " . $this->description;
     }
 }
+

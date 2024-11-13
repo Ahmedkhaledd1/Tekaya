@@ -2,10 +2,11 @@
 require_once 'FoodSet.php';
 class BasicFoodSet extends FoodSet
 {
-    public function __construct()
+    public function __construct(float $price)
     {
-        $this->basicFoodSet = ["Rice", "Sugar", "Oil", "Vegtables"];
-        $this->cost = count($this->basicFoodSet) * 10;
+        $this->description = implode(", ", ["Rice", "Sugar", "Oil", "Vegetables"]);
+        $this->cost=$price;
+        
     }
 
     public function getItems(): string

@@ -6,12 +6,12 @@ class BasicFoodSet extends FoodSet
     {
         $this->description = implode(", ", ["Rice", "Sugar", "Oil", "Vegetables"]);
         $this->cost=$price;
-        
+
     }
 
     public function getItems(): string
     {
-        return implode(",", $this->basicFoodSet);
+        return $this->description;
     }
 
     public function getCost(): int

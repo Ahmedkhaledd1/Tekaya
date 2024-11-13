@@ -1,4 +1,5 @@
 <?php
+require_once 'DonationStrategyInterface.php';
 abstract class AbstractFoodSet  implements DonationStrategyInterface
 {
     private string $description;

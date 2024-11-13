@@ -1,4 +1,5 @@
 <?php
+require_once 'AbstractIndividual.php';
 class Volunteer extends AbstractIndividual
 {
 

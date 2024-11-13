@@ -1,4 +1,5 @@
 <?php
+require_once 'DonationStrategyInterface.php';
 abstract class FoodSet implements DonationStrategyInterface{
     protected DateTime $expirationDate;
     protected array $basicFoodSet=[];

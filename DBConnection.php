@@ -1,26 +1,45 @@
 <?php
-$servername = "localhost"; // Database server name, often 'localhost'
-$username = "root"; // Database username
-$password = ""; // Database password
-$dbname = "tekaya_db"; // Name of the database
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+class DBConnection {
+    private $host = "localhost";
+    private $username = "root";
+    private $password = "";
+    private $db_name = "tekaya_db";
+    private $database_connection;
+    private static $instance = null;
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}else{
-    echo "fool el fol <br>" ;
-    $id=1;
-    $sql="select * from user where Id=$id";
-    $EmployeeDataSet = $conn->query($sql);
-    if ($row = mysqli_fetch_array($EmployeeDataSet))
-		{
-          
-            echo "".$row["email"]."<br>";
-        }
-        echo "waiting" ;
-   
+    // Private constructor to prevent creating a new instance with 'new'
+    private function __construct() {
+        $this->database_connection = $this->database_connect(
+            $this->host,
+            $this->username,
+            $this->password,
+            $this->db_name
+        );
     }
+
+    // Singleton method to get the instance
+    public static function getInstance() {
+        if (self::$instance == null) {
+            self::$instance = new DBConnection();
+        }
+        return self::$instance;
+    }
+
+    // Connection method
+    private function database_connect($database_host, $database_username, $database_password, $db_name) {
+        $connection = mysqli_connect($database_host, $database_username, $database_password, $db_name);
+
+        if (!$connection) {
+            throw new Exception("Database connection error: " . mysqli_connect_error());
+        }
+        return $connection;
+    }
+
+    // Example method to query the database
+    public function getConnection() {
+        return $this->database_connection;
+    }
+}
+
 ?>

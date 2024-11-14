@@ -1,16 +1,16 @@
 <?php
 
-require_once 'Donor.php';
-require_once 'Volunteer.php';
-require_once 'Donation.php';
-require_once 'Benefeciary.php';
-require_once 'FreshMeal.php';
-require_once 'FoodSet.php';
-require_once 'Chicken.php';
-require_once 'Meat.php';
-require_once 'Rice.php';
-require_once 'FoodSetDecorator.php';
-require_once 'BasicFoodSet.php';
+require_once 'Model\Donor.php';
+require_once 'Model\Volunteer.php';
+require_once 'Model\Donation.php';
+require_once 'Model\Benefeciary.php';
+require_once 'Model\FreshMeal.php';
+require_once 'Model\FoodSet.php';
+require_once 'Model\Chicken.php';
+require_once 'Model\Meat.php';
+require_once 'Model\Rice.php';
+require_once 'Model\FoodSetDecorator.php';
+require_once 'Model\BasicFoodSet.php';
 
 $donor = new Donor("Alice the Donor", "password", "015", "alice", "donor", "aliceSSN", false);
 $volunteer = new Volunteer("Bob the Volunteer", "password", "015", "alice", "volunteer", "aliceSSN", true);

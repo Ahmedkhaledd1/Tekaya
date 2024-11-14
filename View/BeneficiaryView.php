@@ -30,5 +30,9 @@ class BeneficiaryView {
         echo "<p><strong>Needs:</strong> " . $beneficiary->needs . "</p>";
         echo "<p><strong>Description:</strong> " . $beneficiary->description . "</p>";
     }
+
+    
+
 }
+
 ?>

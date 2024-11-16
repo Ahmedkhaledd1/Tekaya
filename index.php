@@ -1,10 +1,36 @@
 <?php
-// Include the View.php file (base class)
-require_once __DIR__ . '/Core/View.php';
+require_once 'Controller\userController.php';
 
-// Include the loginAndSingupView.php file (view for login and signup)
-require_once __DIR__ . '/View/loginAndSingupView.php';  // Correct path based on your directory structure
+$request = $_SERVER['REQUEST_URI'];
+$controller = new UserController();
 
-// Instantiate the LoginAndSignupView and render it
-$view = new LoginAndSignupView();
-$view->render();
+switch ($request) {
+    case '/':
+    case '/login':
+        $controller->login();
+        break;
+
+    case '/register':
+        $controller->register();
+        break;
+
+    case '/dashboard':
+        session_start();
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: /login");
+        } else {
+            echo "Welcome to the dashboard.";
+        }
+        break;
+
+    case '/logout':
+        session_start();
+        session_destroy();
+        header("Location: /login");
+        break;
+
+    default:
+        header("HTTP/1.0 404 Not Found");
+        echo "404 Not Found";
+        break;
+}

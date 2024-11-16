@@ -1,0 +1,63 @@
+/* General styling for all input fields */
+input[type="email"], input[type="password"], input[type="text"], select {
+    width: 100%; /* Make input fields take the full width of the container */
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    font-size: 16px; /* Make sure all fields are consistent in size */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Button styling */
+button.button {
+    padding: 12px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button.button:hover {
+    background-color: #45a049;
+}
+
+/* Hide the signup form initially */
+input[type="checkbox"]:checked + .login.form {
+    display: none;
+}
+
+input[type="checkbox"]:checked + .login.form + .registration.form {
+    display: block;
+}
+
+/* Spacing and display properties for login and signup forms */
+.container {
+    width: 500px;
+    margin: auto;
+}
+
+header {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.signup {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.signup label {
+    color: #4CAF50;
+    cursor: pointer;
+}
+
+.signup a {
+    text-decoration: none;
+    color: #4CAF50;
+}
+
+button.button {
+    width: 100%;
+}

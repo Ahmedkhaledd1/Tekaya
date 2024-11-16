@@ -1,4 +1,7 @@
 <?php
+require_once "DBConnection.php";
+
+
 abstract class AbstractUser
 {
     protected string $id;
@@ -10,9 +13,22 @@ abstract class AbstractUser
 
     public function __construct(string $email, string $password, string $mobile)
     {
+        $conn = DBConnection::getInstance();
+        
         $this->email = $email;
         $this->password = $password;
         $this->mobile = $mobile;
+
+        $conn = DBConnection::getInstance()->getConnection();  // Get the actual database connection
+
+        $this->email = $email;
+        $this->password = $password;
+        $this->mobile = $mobile;
+    
+        $sql = "INSERT INTO user (email, password, mobile) VALUES ('$email', '$password', '$mobile')";
+    
+        $conn->query($sql);
+
     }
     public function getEmail()
     {

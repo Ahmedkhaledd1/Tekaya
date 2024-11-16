@@ -11,10 +11,11 @@ require_once 'Model\Meat.php';
 require_once 'Model\Rice.php';
 require_once 'Model\FoodSetDecorator.php';
 require_once 'Model\BasicFoodSet.php';
+require_once "Model\DBConnection.php";
 
 $donor = new Donor("Alice the Donor", "password", "015", "alice", "donor", "aliceSSN", false);
-$volunteer = new Volunteer("Bob the Volunteer", "password", "015", "alice", "volunteer", "aliceSSN", true);
-$beneficiary = new Benefeciary("Charlie the Beneficiary", "password", "015", "alice", "benef", "aliceSSN", true);
+$volunteer = new Volunteer("Bob the Volunteer", "password", "015", "alice", "volunteer", "abc", true);
+$beneficiary = new Benefeciary("Charlie the Beneficiary", "password", "015", "alice", "benef", "amc", true);
 
 $donation = new Donation(1);
 $currentDate = new DateTime();

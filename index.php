@@ -1,9 +1,13 @@
 <?php
 require_once 'Controller\userController.php';
-
+require_once 'Controller\profileController.php';
+require_once 'Controller\sentDonationsController.php';
+require_once 'Controller\receivedDonationsController.php';
 $request = $_SERVER['REQUEST_URI'];
 $controller = new UserController();
-
+$profilecontroller = new ProfileController();
+$sentDonationsController=new SentDonationController();
+$receivedDonationsController=new ReceivedDonationsController();
 switch ($request) {
     case '/':
     case '/login':
@@ -13,6 +17,19 @@ switch ($request) {
     case '/register':
         $controller->register();
         break;
+
+    case '/profile':
+        $profilecontroller->showProfile();  // Show profile route
+        break;
+    case '/sentDonations':
+        $sentDonationsController->showSentDonations();  // Show profile route
+        break;
+
+    case '/receivedDonations':
+        $receivedDonationsController->showReceivedDonations();  // Show profile route
+        break;
+
+
 
     case '/dashboard':
         session_start();

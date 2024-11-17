@@ -4,7 +4,7 @@ class BasicFoodSet extends FoodSet
 {
     public function __construct(float $price)
     {
-        $this->description = implode(", ", ["Rice", "Sugar", "Oil", "Vegetables"]);
+        $this->description = implode(", ", ["Rice", "Oil"]);
         $this->cost=$price;
 
     }

@@ -74,8 +74,17 @@ class Donation implements SubjectInterface
         }
     }
 
-    public function __toString()
+   /* public function __toString()
     {
-        return "Donation Id: ". $this->donationId ."\n email:" . $this->donor->getEmail() . "\nbenefec: " . $this->benefeciary->getEmail() . "\n strat: " . $this->strategy;
+    
+        if ($this->donor) {
+            return "Donation Id: ". $this->donationId ."\n email:" . $this->donor->getEmail() . "\nbenefec: " . $this->benefeciary->getEmail() . "\n strat: " . $this->strategy;
+        } else {
+            return "Donation Id: ". $this->donationId . "\n Donor not set";
+        }
+    
+    }*/
+    public function getDonationId(){
+        return $this->donationId;
     }
 }

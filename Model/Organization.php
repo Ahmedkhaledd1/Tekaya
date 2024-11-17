@@ -20,9 +20,10 @@ class Organization extends AbstractUser
     public function addDonation(Donation $donation) {}
 
     public function setOrgInfo(){
-
+        parent::setUserInfo();
+        $user_id=parent::getIdByEmail(parent::getEmail());
         $conn = DBConnection::getInstance()->getConnection();
-        $sql = "INSERT INTO individual (tax_number, user_id, title,orgtype) VALUES ('$this->taxNumber',NULL,'$this->title','$this->orgType')";
+        $sql = "INSERT INTO individual (tax_number, user_id, title,orgtype) VALUES ('$this->taxNumber','$user_id','$this->title','$this->orgType')";
             if ($conn->query($sql)) {
                 return true;
             } else {
@@ -33,8 +34,7 @@ class Organization extends AbstractUser
 }
 
 
-enum OrgType
-{
-    case restaurant;
-    case shop;
+enum OrgType: string {
+    case restaurant = 'restaurant';
+    case shop = 'shop';
 }

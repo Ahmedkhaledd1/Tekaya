@@ -19,15 +19,36 @@ abstract class AbstractUser
         $this->password = $password;
         $this->mobile = $mobile;
 
-        $conn = DBConnection::getInstance()->getConnection();  // Get the actual database connection
+        
 
-        $this->email = $email;
-        $this->password = $password;
-        $this->mobile = $mobile;
-    
-        $sql = "INSERT INTO user (email, password, mobile) VALUES ('$email', '$password', '$mobile')";
+        
+    }
+
+    public function getUserByEmail(string $email){
+
+        $conn = DBConnection::getInstance()->getConnection();
+        $sql = "SELECT * FROM user WHERE email = '$email'";
+        $result = $conn->query($sql);
+        if ($result && $result->num_rows > 0) {
+            $this->password=$this->$result["password"];
+            $this->mobile=$this->$result["mobile"];
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
+    public function setUserInfo(){
+
+        $conn = DBConnection::getInstance()->getConnection();  // Get the actual database connection
+        $sql = "INSERT INTO user (email, password, mobile) VALUES ('$this->email', '$this->password', '$this->mobile')";
     
         $conn->query($sql);
+        if ($conn->query($sql)) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
     public function getEmail()

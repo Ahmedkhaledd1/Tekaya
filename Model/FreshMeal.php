@@ -8,6 +8,21 @@ class FreshMeal implements DonationStrategyInterface
     public function __construct(DateTime $expirationDate)
     {
         $this->expirationDate = $expirationDate;
+        
+    
+    }
+
+
+    public function setFreshMealInfo(){
+        $conn = DBConnection::getInstance()->getConnection();  // Get the actual database connection
+    
+        $sql = "INSERT INTO address (fresh_meal_id) VALUE ('$this->expirationDate')"; 
+        if( $conn->query($sql)){
+            return true;
+
+        }else{
+            return false;
+        }
     }
 
     public function deliverToBenefeciary(Donation $donation, Benefeciary $benefeciary): bool

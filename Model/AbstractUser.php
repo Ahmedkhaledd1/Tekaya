@@ -13,23 +13,54 @@ abstract class AbstractUser
 
     public function __construct(string $email, string $password, string $mobile)
     {
-        $conn = DBConnection::getInstance();
+       
         
         $this->email = $email;
         $this->password = $password;
         $this->mobile = $mobile;
 
-        $conn = DBConnection::getInstance()->getConnection();  // Get the actual database connection
+        
 
-        $this->email = $email;
-        $this->password = $password;
-        $this->mobile = $mobile;
-    
-        $sql = "INSERT INTO user (email, password, mobile) VALUES ('$email', '$password', '$mobile')";
-    
-        $conn->query($sql);
-
+        
     }
+
+    public function getUserByEmail(string $email)
+    {
+        $conn = DBConnection::getInstance()->getConnection();
+        $sql = "SELECT * FROM user WHERE email = '$email'";
+        $result = $conn->query($sql);
+    
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc(); // Fetch the associative array
+            $this->password = $row["password"]; // Set the class property
+            $this->mobile = $row["mobile"]; // Set the class property
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function setUserInfo() {
+        $conn = DBConnection::getInstance()->getConnection();  // Get the actual database connection
+    
+        // Check if email already exists in the database
+        $sql = "SELECT * FROM user WHERE email = '$this->email'";
+        $result = $conn->query($sql);
+        if ($result && $result->num_rows > 0) {
+            // Return error if email exists
+            return 'Error: Duplicate entry for email';
+        }
+    
+        // Insert user into the user table
+        $sql = "INSERT INTO user (email, password, mobile) VALUES ('$this->email', '$this->password', '$this->mobile')";
+        if ($conn->query($sql)) {
+            // Successfully inserted user, now get the user_id
+            $user_id = $conn->insert_id;
+            return $user_id;  // Return user_id to insert into individual table
+        } else {
+            return false;  // Failed to insert user info
+        }
+    }
+    
     public function getEmail()
     {
         return $this->email;
@@ -45,6 +76,10 @@ abstract class AbstractUser
     public function getMobile(): string
     {
         return $this->mobile;
+    }
+    public function getPassword(): string
+    {
+        return $this->password;
     }
 
     public static function getIdByEmail(string $email){

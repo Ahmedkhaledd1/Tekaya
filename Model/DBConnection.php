@@ -16,6 +16,7 @@ class DBConnection {
             $this->password,
             $this->db_name
         );
+        
     }
 
     // Singleton method to get the instance

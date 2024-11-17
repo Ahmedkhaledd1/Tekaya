@@ -3,11 +3,13 @@ require_once 'Controller\userController.php';
 require_once 'Controller\profileController.php';
 require_once 'Controller\sentDonationsController.php';
 require_once 'Controller\receivedDonationsController.php';
+require_once 'Controller/createDonationController.php';  // Adjusted the path
 $request = $_SERVER['REQUEST_URI'];
 $controller = new UserController();
 $profilecontroller = new ProfileController();
 $sentDonationsController=new SentDonationController();
 $receivedDonationsController=new ReceivedDonationsController();
+
 switch ($request) {
     case '/':
     case '/login':
@@ -44,6 +46,12 @@ switch ($request) {
         session_start();
         session_destroy();
         header("Location: /login");
+        break;
+
+    // Add case for create donation route
+    case '/create-donation':
+        $donationController = new createDonationController();
+        $donationController->createDonation();
         break;
 
     default:

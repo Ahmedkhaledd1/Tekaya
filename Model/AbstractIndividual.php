@@ -10,16 +10,28 @@ abstract class AbstractIndividual extends AbstractUser
 
     public function __construct(string $email, string $password, string $mobile, string $firstName, string $lastName, string $SSN, bool $gender)
     {
-        $conn = DBConnection::getInstance()->getConnection();
+    
         parent::__construct($email, $password, $mobile);
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->SSN = $SSN;
         $this->gender = $gender;
         
-        $sql = "INSERT INTO individual (ssn, user_id, first_name,last_name,gender) VALUES ('$SSN',NULL,'$firstName', '$lastName','$gender')";
         
-        $conn->query($sql);
+
+    }
+
+    public function setUserInfo(){
+
+        $conn = DBConnection::getInstance()->getConnection();  // Get the actual database connection
+        $sql = "INSERT INTO individual (ssn, user_id, first_name,last_name,gender) VALUES ('$this->SSN',NULL,'$this->firstName', '$this->lastName','$this->gender')";
+    
+
+        if ($conn->query($sql)) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
 }

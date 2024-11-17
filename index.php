@@ -2,7 +2,7 @@
 require_once 'Controller\loginController.php';
 require_once 'Controller\signUpController.php';
 //require_once 'Controller\profileController.php';
-//require_once 'Controller\sentDonationsController.php';
+require_once 'Controller\sentDonationsController.php';
 //require_once 'Controller\receivedDonationsController.php';
 require_once 'Controller/createDonationController.php';  // Adjusted the path
 require_once 'Controller\editDonationController.php';
@@ -10,7 +10,7 @@ $request = $_SERVER['REQUEST_URI'];
 $loginController = new LoginController();
 $signUpController = new SignUpController();
 //$profilecontroller = new ProfileController();
-//$sentDonationsController=new SentDonationController();
+$sentDonationsController=new SentDonationController();
 //$receivedDonationsController=new ReceivedDonationsController();
 $donationController = new createDonationController();
 $editdonationController = new EditDonationController();
@@ -24,16 +24,16 @@ switch ($request) {
         $signUpController->register();
         break;
 
-    /*case '/profile':
-        $profilecontroller->showProfile();  // Show profile route
-        break;
+    // case '/profile':
+    //     $profilecontroller->showProfile();  // Show profile route
+    //     break;
     case '/sentDonations':
         $sentDonationsController->showSentDonations();  // Show profile route
         break;
 
-    case '/receivedDonations':
-        $receivedDonationsController->showReceivedDonations();  // Show profile route
-        break;*/
+    // case '/receivedDonations':
+    //     $receivedDonationsController->showReceivedDonations();  // Show profile route
+    //     break;
 
     case '/editDonation':
         $editdonationController->showEditDonation();
@@ -59,6 +59,10 @@ switch ($request) {
     case '/createDonation':
         
         $donationController->showCreateDonation();
+        break;
+    case '/create-donation/confirm':
+    
+        $donationController->confirmDonation();
         break;
 
     default:

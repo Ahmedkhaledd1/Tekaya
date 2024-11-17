@@ -1,8 +1,10 @@
 <?php
 require_once __DIR__ . '/../Core/View.php';
 
-class CreateDonationView extends View {
-    public function render($title, $type, $description, $cost, $addons, $expiryDate, $selectedAddons) {
+class CreateDonationView extends View
+{
+    public function render($title, $type, $description, $cost, $addons, $expiryDate, $selectedAddons)
+    {
         $this->addStyle('/css/style.css');
         echo $this->renderHeader();
 
@@ -23,7 +25,7 @@ class CreateDonationView extends View {
         // Show Fresh Meal form
         if ($type === 'freshmeal') {
             echo "
-            <form method='POST' action=''>
+            <form method='POST' action='/create-donation/confirm' style='display:inline'>
                 <input type='hidden' name='type' value='freshmeal'>
                 <label for='expiry_date'>Expiry Date:</label>
                 <input type='date' name='expiry_date' value='{$expiryDate}'>
@@ -39,7 +41,7 @@ class CreateDonationView extends View {
                 <label for='addon'>Add Add-on:</label>
                 <select name='addon' id='addon'>
                     <option value='' disabled selected>Select an add-on</option>";
-            
+
             foreach ($addons as $index => $addon) {
                 echo "<option value='{$index}'>{$addon['name']} (+\${$addon['cost']})</option>";
             }
@@ -64,7 +66,9 @@ class CreateDonationView extends View {
             }
 
             echo "
-                <button type='submit' formaction='/create-donation/confirm'>Confirm Donation</button>
+                <form method='POST' action='/create-donation/confirm' style='display:inline'>
+                    <button type='submit'>Confirm Donation</button>
+                </form>
             </form>";
         }
 

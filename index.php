@@ -1,12 +1,14 @@
 <?php
-require_once 'Controller\userController.php';
+require_once 'Controller\loginController.php';
+require_once 'Controller\signUpController.php';
 //require_once 'Controller\profileController.php';
 //require_once 'Controller\sentDonationsController.php';
 //require_once 'Controller\receivedDonationsController.php';
 require_once 'Controller/createDonationController.php';  // Adjusted the path
 require_once 'Controller\editDonationController.php';
 $request = $_SERVER['REQUEST_URI'];
-$controller = new UserController();
+$loginController = new LoginController();
+$signUpController = new SignUpController();
 //$profilecontroller = new ProfileController();
 //$sentDonationsController=new SentDonationController();
 //$receivedDonationsController=new ReceivedDonationsController();
@@ -15,11 +17,11 @@ $editdonationController = new EditDonationController();
 switch ($request) {
     case '/':
     case '/login':
-        $controller->login();
+        $loginController->login();
         break;
 
     case '/register':
-        $controller->register();
+        $signUpController->register();
         break;
 
     /*case '/profile':

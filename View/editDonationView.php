@@ -1,18 +1,18 @@
 <?php
 require_once __DIR__ . '/../Core/View.php';
 
-class CreateDonationView extends View {
-    public function render($title, $type, $description, $cost, $addons, $expiryDate, $selectedAddons) {
+class EditDonationView extends View {
+    public function render($title, $type, $expiryDate, $addons, $selectedAddons, $baseFoodSet) {
         $this->addStyle('/css/style.css');
         echo $this->renderHeader();
 
         echo "
         <div class='container'>
-            <h1>Create Donation</h1>
+            <h1>Edit Donation</h1>
             <form method='POST' action=''>
                 <label for='title'>Title:</label>
                 <input type='text' id='title' name='title' value='{$title}' required placeholder='Enter donation title'>
-                
+
                 <label for='type'>Type:</label>
                 <select name='type' id='type' onchange='this.form.submit()'>
                     <option value='freshmeal' " . ($type === 'freshmeal' ? 'selected' : '') . ">Fresh Meal</option>
@@ -20,26 +20,27 @@ class CreateDonationView extends View {
                 </select>
             </form>";
 
-        // Show Fresh Meal form
+        // Show Fresh Meal form (for expiry date)
         if ($type === 'freshmeal') {
             echo "
             <form method='POST' action=''>
                 <input type='hidden' name='type' value='freshmeal'>
                 <label for='expiry_date'>Expiry Date:</label>
                 <input type='date' name='expiry_date' value='{$expiryDate}'>
-                <button type='submit'>Create Donation</button>
+                <button type='submit'>Update Donation</button>
             </form>";
         } elseif ($type === 'foodset') {
+            // Show Food Set form (with add-ons)
             echo "
             <form method='POST' action=''>
                 <input type='hidden' name='type' value='foodset'>
-                <p id='description'>Description: {$description}</p>
-                <p id='cost'>Cost: \${$cost}</p>
+                <p id='description'>Description: {$baseFoodSet['description']}</p>
+                <p id='cost'>Cost: \${$baseFoodSet['cost']}</p>
 
                 <label for='addon'>Add Add-on:</label>
                 <select name='addon' id='addon'>
                     <option value='' disabled selected>Select an add-on</option>";
-            
+
             foreach ($addons as $index => $addon) {
                 echo "<option value='{$index}'>{$addon['name']} (+\${$addon['cost']})</option>";
             }

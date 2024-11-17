@@ -36,15 +36,24 @@ class Donation implements SubjectInterface
         return $this->strategy;
     }
 
-    public function excuteDonation(Benefeciary $benefeciary): bool
+    public function excuteDonation(Benefeciary $benefeciary, FoodSet $foodset ): bool
     {
         $this->strategy->deliverToBenefeciary($this, $benefeciary);
         if ($this->confirmReceived) {
             #notify observers that donation delivered successfully
+            $conn = DBConnection::getInstance()->getConnection();
+            if($foodset !=Null){
+                $sql = "INSERT INTO address (description, cost) VALUES ('" . $foodset->getItems() . "', '" . $foodset->getCost() . "')";
+                $conn->query($sql);
+            }
+            
             return true;
         }
+
         return false;
     }
+
+
 
     public function setConfirmReceived(Benefeciary $benefeciary)
     {

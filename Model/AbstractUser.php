@@ -24,19 +24,20 @@ abstract class AbstractUser
         
     }
 
-    public function getUserByEmail(string $email){
-
+    public function getUserByEmail(string $email)
+    {
         $conn = DBConnection::getInstance()->getConnection();
         $sql = "SELECT * FROM user WHERE email = '$email'";
         $result = $conn->query($sql);
+    
         if ($result && $result->num_rows > 0) {
-            $this->password=$this->$result["password"];
-            $this->mobile=$this->$result["mobile"];
+            $row = $result->fetch_assoc(); // Fetch the associative array
+            $this->password = $row["password"]; // Set the class property
+            $this->mobile = $row["mobile"]; // Set the class property
             return true;
-        }else{
+        } else {
             return false;
         }
-        
     }
     public function setUserInfo(){
 
@@ -66,6 +67,10 @@ abstract class AbstractUser
     public function getMobile(): string
     {
         return $this->mobile;
+    }
+    public function getPassword(): string
+    {
+        return $this->password;
     }
 
     public static function getIdByEmail(string $email){

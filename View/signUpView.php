@@ -7,6 +7,7 @@ class SignUpView extends View {
         $this->setTitle("Signup Page");
         $this->addStyle("View/style.css");  // Correct path to style.css inside the View folder
     }
+
     public function render($message = '') {
         $content = $this->renderHeader();
         $content .= "
@@ -29,7 +30,11 @@ class SignUpView extends View {
             </select>
             
             <div id='organizationFields' style='display: none;'>
-                <input type='text' name='organizationType' placeholder='Organization Type'>
+                <label for='organizationType'>Organization Type</label>
+                <select name='organizationType' id='organizationType'>
+                    <option value='restaurant'>Restaurant</option>
+                    <option value='shop'>Shop</option>
+                </select>
                 <input type='text' name='organizationTitle' placeholder='Organization Title'>
                 <input type='text' name='taxNumber' placeholder='Tax Number'>
             </div>

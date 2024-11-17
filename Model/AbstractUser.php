@@ -43,7 +43,7 @@ abstract class AbstractUser
         $conn = DBConnection::getInstance()->getConnection();  // Get the actual database connection
         $sql = "INSERT INTO user (email, password, mobile) VALUES ('$this->email', '$this->password', '$this->mobile')";
     
-    
+        $conn->query($sql);
         if ($conn->query($sql)) {
             return true;
         } else {

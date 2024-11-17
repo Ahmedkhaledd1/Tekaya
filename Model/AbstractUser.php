@@ -42,8 +42,52 @@ abstract class AbstractUser
     {
         return $this->donations;
     }
-    public function getMobile()
+    public function getMobile(): string
     {
         return $this->mobile;
     }
+
+    public static function getIdByEmail(string $email){
+        $conn = DBConnection::getInstance()->getConnection();
+        $sql = "SELECT id FROM user WHERE email = '$email'";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return $row['id'];
+        } else {
+            return 0;
+        }
+    }
+    public static function getDonationsByEmail(string $email): array{
+        $id = self::getIdByEmail($email);
+        if ($id === 0) {
+            return []; 
+        }
+        $conn = DBConnection::getInstance()->getConnection();
+        $sql = "SELECT * FROM donation WHERE (donor_id = '$id' OR beneficiary_id = '$id')";
+        $result = $conn->query($sql);
+
+        $donations = [];
+        while ($row = $result->fetch_assoc()) {
+            $donation = new Donation($row['donation_id']);
+            $donations[] = $donation;
+        }
+    
+        return $donations;
+    }
+
+    public static function getMobileByEmail(string $email): ?string
+{
+    $conn = DBConnection::getInstance()->getConnection();
+    $sql = "SELECT mobile FROM user WHERE email = '$email'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row['mobile'];
+    } else {
+        return null;
+    }
+}
 }

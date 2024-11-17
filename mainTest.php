@@ -12,14 +12,13 @@ require_once 'Model\Rice.php';
 require_once 'Model\FoodSetDecorator.php';
 require_once 'Model\BasicFoodSet.php';
 require_once "Model\DBConnection.php";
-
-$donor = new Donor("Alice the Donor", "password", "015", "alice", "donor", "aliceSSN", false);
-$volunteer = new Volunteer("Bob the Volunteer", "password", "015", "alice", "volunteer", "abc", true);
-$beneficiary = new Benefeciary("Charlie the Beneficiary", "password", "015", "alice", "benef", "amc", true);
+/*
+$donor = new Donor("a the Donor", "password", "015", "alice", "donor", "x", false);
+$volunteer = new Volunteer("b the Volunteer", "johfsd", "010", "Bob", "volunteer", "y", true);
+$beneficiary = new Benefeciary("c the Beneficiary", "ugsfigf", "011", "CHARLIE", "benef", "z", true);
 
 $donation = new Donation(1);
 $currentDate = new DateTime();
-
 $currentDate->add(new DateInterval('PT6H'));
 $donation->setDonationStrategy(new FreshMeal($currentDate));
 $donor->addDonation($donation);
@@ -33,3 +32,12 @@ echo $foodset->getItems(). "<br>";
 $foodset2 =new  Chicken($foodset,200);
 
 echo $foodset2->getItems()." ". $foodset2->getCost();
+echo $donor->getEmail();*/
+
+echo AbstractUser::getMobileByEmail('johndoe@example.com');
+echo '<br>';
+$donations = AbstractUser::getDonationsByEmail('johndoe@example.com');
+
+foreach ($donations as $donation) {
+    echo $donation->getDonationId() . '<br>';
+}

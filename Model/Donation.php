@@ -1,5 +1,6 @@
 <?php
 require_once 'SubjectInterface.php';
+require_once "DBConnection.php";
 class Donation implements SubjectInterface
 {
     private int $donationId;
@@ -11,12 +12,16 @@ class Donation implements SubjectInterface
 
     public function __construct(int $id)
     {
+        $conn = DBConnection::getInstance()->getConnection();  // Get the actual database connection
         $this-> donationId= $id;
+        $sql = "INSERT INTO address (donation_id) VALUE ('$id')"; 
+        $conn->query($sql);
     }
 
     public function setDonationStrategy(DonationStrategyInterface $strategy): bool
     {
         $this->strategy = $strategy;
+        
         return true;
     }
 

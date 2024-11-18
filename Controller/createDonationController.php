@@ -1,7 +1,15 @@
 <?php
 require_once 'View/CreateDonationView.php';
+require_once 'Model/Donation.php';
+require_once 'Model/BasicFoodSet.php';
+require_once 'Model/FreshMeal.php';
+require_once 'Model/FoodSet.php';
+require_once 'Model/Rice.php';
+require_once 'Model/Oil.php';
+require_once 'Model/Beans.php';
 
-class CreateDonationController {
+class CreateDonationController
+{
     private $addons = [
         ['name' => 'Rice', 'cost' => 5],
         ['name' => 'Beans', 'cost' => 3],
@@ -9,11 +17,12 @@ class CreateDonationController {
     ];
 
     private $baseFoodSet = [
-        'description' => 'Basic food set: Bread and water',
+        'description' => 'Basic food set: Rice, Oil',
         'cost' => 10
     ];
 
-    public function __construct() {
+    public function __construct()
+    {
         session_start();
         // Initialize session values if not set
         if (!isset($_SESSION['donation'])) {
@@ -26,7 +35,8 @@ class CreateDonationController {
         }
     }
 
-    public function showCreateDonation() {
+    public function showCreateDonation()
+    {
         // Initialize data from POST or session
         $title = isset($_POST['title']) ? $_POST['title'] : $_SESSION['donation']['title'];
         $type = isset($_POST['type']) ? $_POST['type'] : $_SESSION['donation']['type'];
@@ -66,9 +76,34 @@ class CreateDonationController {
         $view->render($title, $type, $description, $cost, $this->addons, $expiryDate, $_SESSION['donation']['addons']);
     }
 
-    public function confirmDonation() {
-        $_SESSION['donation'] = []; // Clear session after confirmation
-        header("Location: /showmydonation");
-        exit();
+    public function confirmDonation()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/create-donation/confirm') {
+            $donation = new Donation();
+            // echo "<script>console.log('{$_SESSION['donation']['expiry_date']}');</script>";
+            if ($_SESSION['donation']['type'] === "freshmeal") {
+
+                $donation->setDonationStrategy(new FreshMeal(new DateTime($_SESSION['donation']['expiry_date'])));
+            } else if ($_SESSION['donation']['type'] === "foodset") {
+                $foodset = new BasicFoodSet($this->baseFoodSet['cost']);
+                foreach ($_SESSION['donation']['addons'] as $addon) {
+                    foreach ($this->addons as $baseaddon) {
+                        if ($baseaddon['name'] === $addon['name']) {
+                            $className = $baseaddon['name'];
+                            if (class_exists($className)) {
+                                $foodset = new $className($foodset, $baseaddon['cost']);
+                            } else {
+                                echo "Class $className does not exist!" . PHP_EOL;
+                            }
+                        }
+                    }
+                }
+
+                $donation->setDonationStrategy($foodset);
+            }
+            $_SESSION['donation'] = []; // Clear session after confirmation
+            header("Location: /sentDonations");
+            // exit();
+        }
     }
 }

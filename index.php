@@ -24,12 +24,15 @@ switch ($request) {
         $signUpController->register();
         break;
 
+
     case '/profile':
         $profilecontroller->showProfile();  // Show profile route
         break;
+
     case '/sentDonations':
         $sentDonationsController->showSentDonations();  // Show profile route
         break;
+
 
     case '/receivedDonations':
         $receivedDonationsController->showReceivedDonations();  // Show profile route
@@ -59,6 +62,10 @@ switch ($request) {
     case '/createDonation':
         
         $donationController->showCreateDonation();
+        break;
+    case '/create-donation/confirm':
+    
+        $donationController->confirmDonation();
         break;
 
     default:

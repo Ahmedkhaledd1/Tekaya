@@ -26,11 +26,15 @@ class LoginController
                 // Check if passwords match
                 if ($password === $user->getPassword()) {
                     // Store the user in the session
+                    $user->getUserByEmail($email);
                     session_start();
                     $_SESSION['user_email'] = $email;
-
+                    $_SESSION['user_password'] = $password;
+                    $_SESSION['user_role']=$user->getRolebyEmail($email);
+                    $_SESSION['user_id']=$user->getIdByEmail($email);
+                    //$_SESSION['user']=serialize($user);
                     // Redirect to a dashboard or home page
-                    header("Location: /dashboard");
+                    header("Location: /profile");
                     exit();
                 } else {
                     $this->renderWithMessage("Incorrect password.");

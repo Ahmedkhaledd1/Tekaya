@@ -39,7 +39,7 @@ abstract class AbstractUser
             return false;
         }
     }
-    public function setUserInfo() {
+    public function setUserInfo(string $role) {
         $conn = DBConnection::getInstance()->getConnection();  // Get the actual database connection
     
         // Check if email already exists in the database
@@ -51,7 +51,9 @@ abstract class AbstractUser
         }
     
         // Insert user into the user table
-        $sql = "INSERT INTO user (email, password, mobile) VALUES ('$this->email', '$this->password', '$this->mobile')";
+        $sql = "INSERT INTO `user` (`email`, `password`, `mobile`, `role`) 
+        VALUES ('$this->email', '$this->password', '$this->mobile', '$role')";
+
         if ($conn->query($sql)) {
             // Successfully inserted user, now get the user_id
             $user_id = $conn->insert_id;
@@ -89,11 +91,26 @@ abstract class AbstractUser
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
+            
             return $row['id'];
+        } else {
+            return null;
+        }
+    }
+
+    public static function getRolebyEmail(string $email){
+        $conn = DBConnection::getInstance()->getConnection();
+        $sql = "SELECT role FROM user WHERE email = '$email'";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return $row['role'];
         } else {
             return 0;
         }
     }
+
     public static function getDonationsByEmail(string $email): array{
         $id = self::getIdByEmail($email);
         if ($id === 0) {

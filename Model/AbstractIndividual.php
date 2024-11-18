@@ -20,10 +20,22 @@ abstract class AbstractIndividual extends AbstractUser
         
 
     }
+    public function getFirstName(){
+        return $this->firstName;
+    }
+    public function getLastName(){
+        return $this->lastName;
+    }
+    public function getSSN(){
+        return $this->SSN;
+    }
+    public function getGender(){
+        return $this->gender;
+    }
 
-    public function setIndividualInfo() {
+    public function setIndividualInfo(string $role) {
         // First, insert user and get the user_id
-        $user_id = parent::setUserInfo();
+        $user_id = parent::setUserInfo($role);
         
         if ($user_id === false) {
             // If user insertion failed, return an error
@@ -41,6 +53,35 @@ abstract class AbstractIndividual extends AbstractUser
             return false;  // Failed to insert individual info
         }
     }
+    public function getUserbyId(int $id){
+        // Check if email already exists in the database
+        $conn = DBConnection::getInstance()->getConnection();
+        $sql = "SELECT * FROM user WHERE id = '$id'";
+        $result = $conn->query($sql);
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            parent::__construct($row['email'],$row['password'],$row['mobile']);
+        }
+        else{
+            return false;
+        }
+    }
     
+    public function getInvidualByID(int $id){
+        $conn = DBConnection::getInstance()->getConnection();
+        $sql = "SELECT * FROM individual WHERE user_id = '$id'";
+         $result = $conn->query($sql);
+
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc(); // Fetch the associative array
+        $this->firstName = $row["first_name"]; // Set the class property
+        $this->lastName = $row["last_name"]; // Set the class property
+        $this->gender = $row["gender"]; // Set the class property
+        $this->SSN = $row["ssn"];
+        return true;
+    } else {
+        return false;
+    }
+    }
     
 }

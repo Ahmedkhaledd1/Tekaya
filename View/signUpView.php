@@ -23,10 +23,10 @@ class SignUpView extends View {
             
             <label for='userType'>User Type</label>
             <select name='userType' id='userType' onchange='toggleFields()' required>
-                <option value='organization'>Organization</option>
-                <option value='volunteer'>Volunteer</option>
-                <option value='beneficiary'>Beneficiary</option>
-                <option value='donor'>Donor</option>
+                <option value='Organization'>Organization</option>
+                <option value='Volunteer'>Volunteer</option>
+                <option value='Beneficiary'>Beneficiary</option>
+                <option value='Donor'>Donor</option>
             </select>
             
             <div id='organizationFields' style='display: none;'>
@@ -59,7 +59,7 @@ class SignUpView extends View {
                 const orgFields = document.getElementById('organizationFields');
                 const indFields = document.getElementById('individualFields');
                 
-                if (userType === 'organization') {
+                if (userType === 'Organization') {
                     orgFields.style.display = 'block';
                     indFields.style.display = 'none';
                 } else {

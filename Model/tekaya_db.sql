@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 13, 2024 at 07:56 PM
+-- Generation Time: Nov 18, 2024 at 10:45 AM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
@@ -168,7 +168,8 @@ CREATE TABLE IF NOT EXISTS `individual` (
 
 INSERT INTO `individual` (`ssn`, `user_id`, `first_name`, `last_name`, `gender`) VALUES
 ('123-45-6789', 1, 'John', 'Doe', 1),
-('987-65-4321', 2, 'Jane', 'Doe', 0);
+('987-65-4321', 2, 'Jane', 'Doe', 0),
+('547647868', 20, 'zeft', 'rat', 1);
 
 -- --------------------------------------------------------
 
@@ -191,7 +192,8 @@ CREATE TABLE IF NOT EXISTS `organization` (
 --
 
 INSERT INTO `organization` (`tax_number`, `user_id`, `title`, `orgtype`) VALUES
-('TAX123456', 3, 'Charity Org', 'Non-Profit');
+('TAX123456', 3, 'Charity Org', 'Non-Profit'),
+('5464646', 19, 'man', 'restaurant');
 
 -- --------------------------------------------------------
 
@@ -204,23 +206,24 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(191) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `phone_number` varchar(20) DEFAULT NULL,
   `address_id` int DEFAULT NULL,
   `mobile` varchar(20) DEFAULT NULL,
-  `role` enum('Individual','Organization') NOT NULL,
+  `role` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   KEY `address_id` (`address_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `email`, `password`, `phone_number`, `address_id`, `mobile`, `role`) VALUES
-(1, 'johndoe@example.com', 'password123', '123-456-7890', 1, '123-456-7890', 'Individual'),
-(2, 'janedoe@example.com', 'password123', '234-567-8901', 2, '234-567-8901', 'Individual'),
-(3, 'charity@example.com', 'securepass', '345-678-9012', 3, '345-678-9012', 'Organization');
+INSERT INTO `user` (`id`, `email`, `password`, `address_id`, `mobile`, `role`) VALUES
+(1, 'johndoe@example.com', 'password123', 1, '123-456-7890', 'Individual'),
+(2, 'janedoe@example.com', 'password123', 2, '234-567-8901', 'Individual'),
+(3, 'charity@example.com', 'securepass', 3, '345-678-9012', 'Organization'),
+(19, 'youssef.mahmoud.eng@gmail.com', '123', NULL, '01017261198', 'Organization'),
+(20, 'zef@gmail.com', '123', NULL, '01017261198', 'Beneficiary');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

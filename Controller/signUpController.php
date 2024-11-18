@@ -2,7 +2,7 @@
 require_once 'View/signUpView.php';
 require_once 'Model\AbstractIndividual.php';
 require_once 'Model\Organization.php';
-require_once 'Model\Benefeciary.php';
+require_once 'Model\Volunteer.php';
 require_once 'Model\Benefeciary.php';
 require_once 'Model\Donor.php';
 class SignUpController {
@@ -17,12 +17,12 @@ class SignUpController {
 
             // Handle user creation based on type
             try {
-                if ($userType === 'organization') {
+                if ($userType === 'Organization') {
                     $organizationType=OrgType::from($_POST['organizationType']);
                     $organizationTitle = $_POST['organizationTitle'];
                     $taxNumber = $_POST['taxNumber'];
                     $organization = new Organization($email, $password, $mobile, $organizationTitle,$organizationType , $taxNumber);
-                    $organization->setOrgInfo();  // Save organization-specific info
+                    $organization->setOrgInfo('Organization');  // Save organization-specific info
                 } else {
                     $firstName = $_POST['firstName'];
                     $lastName = $_POST['lastName'];
@@ -32,14 +32,17 @@ class SignUpController {
                     // Use a subclass of AbstractIndividual based on specific userType if needed
                     if($_POST['userType']=='Volunteer'){
                         $individual = new Volunteer($email, $password, $mobile, $firstName, $lastName, $ssn, $gender);
+                        $response = $individual->setIndividualInfo('Volunteer');
                     }
                     elseif($_POST['userType']=='Beneficiary'){
                         $individual = new Benefeciary($email, $password, $mobile, $firstName, $lastName, $ssn, $gender);
+                        $response = $individual->setIndividualInfo('Beneficiary');
                      }else{
                         $individual = new Donor($email, $password, $mobile, $firstName, $lastName, $ssn, $gender);
+                        $response = $individual->setIndividualInfo('Donor');
                      }
     
-                     $response = $individual->setIndividualInfo();
+                    
                      echo $response;
                      if ($response === true) {
                          echo "Sign up successful!";

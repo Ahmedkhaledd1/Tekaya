@@ -29,6 +29,7 @@ class ProfileController {
                 'title' => $user->getTitle(),
                 'taxNumber' => $user->getTaxNumber(),
             ];
+            $_SESSION['user']=serialize($user);
             echo $view->renderOrganizationProfile($userData);
         } elseif($user_role=='Volunteer') {
             $user=new Volunteer($email,"","","","","",0);
@@ -43,6 +44,7 @@ class ProfileController {
                 'ssn' => $user->getSSN(),
                 'gender' => ($user->getGender() == true) ? 'Male' : 'Female',
             ];
+            $_SESSION['user']=serialize($user);
             echo $view->renderIndividualProfile($userData);
         }
         elseif($user_role=='Beneficiary') {
@@ -58,6 +60,7 @@ class ProfileController {
                 'ssn' => $user->getSSN(),
                 'gender' => ($user->getGender() == true) ? 'Male' : 'Female',
             ];
+            $_SESSION['user']=serialize($user);
             echo $view->renderIndividualProfile($userData);
         }
         elseif($user_role=='Donor') {
@@ -73,6 +76,7 @@ class ProfileController {
                 'ssn' => $user->getSSN(),
                 'gender' => ($user->getGender() == true) ? 'Male' : 'Female',
             ];
+            $_SESSION['user']=serialize($user);
             echo $view->renderIndividualProfile($userData);
         }
         

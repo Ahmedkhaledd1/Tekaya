@@ -2,6 +2,8 @@
 require_once 'View\sentDonationsView.php';
 class SentDonationController {
     public function showSentDonations() {
+       
+    
         // Sample data, typically fetched from the database
         $donations = [
             [

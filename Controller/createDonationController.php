@@ -66,7 +66,6 @@ class CreateDonationController
         // Update description and cost based on selected add-ons
         $description = $this->baseFoodSet['description'];
         $cost = $this->baseFoodSet['cost'];
-        print_r($_SESSION);
         foreach ($_SESSION['donation']['addons'] as $addon) {
             $description .= ', ' . $addon['name'];
             $cost += $addon['cost'];
@@ -79,12 +78,13 @@ class CreateDonationController
 
     public function confirmDonation()
     {
+        $user_id = $_SESSION['user_id'];
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/createDonation/confirm') {
             $donation = new Donation();
             // echo "<script>console.log('{$_SESSION['donation']['expiry_date']}');</script>";
             if ($_SESSION['donation']['type'] === "freshmeal") {
 
-                $donation->setDonationStrategy(new FreshMeal(new DateTime($_SESSION['donation']['expiry_date'])));
+                $donation->setDonationStrategy(new FreshMeal(new DateTime($_SESSION['donation']['expiry_date'])), $user_id);
             } else if ($_SESSION['donation']['type'] === "foodset") {
                 $foodset = new BasicFoodSet($this->baseFoodSet['cost']);
                 foreach ($_SESSION['donation']['addons'] as $addon) {
@@ -100,7 +100,7 @@ class CreateDonationController
                     }
                 }
 
-                $donation->setDonationStrategy($foodset);
+                $donation->setDonationStrategy($foodset, $user_id);
             }
             $_SESSION['donation'] = []; // Clear session after confirmation
             header("Location: /sentDonations");

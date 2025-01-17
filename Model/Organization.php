@@ -1,11 +1,13 @@
 <?php
 require_once 'AbstractUser.php';
 require_once "DBConnection.php";
+require_once 'PaymentFacade.php';
 class Organization extends AbstractUser
 {
     private string $title;
     private OrgType $orgType;
     private string $taxNumber;
+    private PaymentFacade $payment;
 
     public function __construct(string $email, string $password, string $mobile, string $title, OrgType $orgType, string $taxNumber,)
     {
@@ -83,6 +85,15 @@ class Organization extends AbstractUser
         } else {
             return false;
         }
+    }
+
+
+    
+    public function pay (String $type,string $email,String $password,int $cardNumber ,int $cvv,FoodSet $foodSet):bool{ 
+        $this->payment=new PaymentFacade();
+
+        return $this->payment->pay($type,$email,$password,$cardNumber,$cvv,$foodSet->getCost());
+
     }
 
 }

@@ -21,10 +21,13 @@ class Donor extends AbstractIndividual
         $donation->addObserver(new EmailNotifier($this));
     }
 
-    public function pay (String $type):bool{
-        $this->payment=new PaymentFacade($type);
-        // return $this->payment->pay();
+    public function pay (String $type,string $email,String $password,int $cardNumber ,int $cvv,FoodSet $foodSet):bool{ 
+        $this->payment=new PaymentFacade();
 
+        return $this->payment->pay($type,$email,$password,$cardNumber,$cvv,$foodSet->getCost());
 
     }
+
+
+
 }

@@ -15,12 +15,8 @@ class PaymentFacade {
     public function __construct(){
         $this->validator=new PaymentAdmin();
     }
-   
-    
-    
 
     
-
     public function pay(String $type,String $email,string $password,int $cardNumber,int $cvv, FoodSet $foodSet){
 
         if($type=='Paypal'){

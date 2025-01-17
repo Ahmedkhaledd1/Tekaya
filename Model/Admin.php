@@ -29,8 +29,9 @@ class Admin extends AbstractIndividual
         $donation ->setVolunteer($volunteer);
         return true;
     }
-    public function generateReport():void
+    public function generateReport($donorId):string
     {
         //to be implemented
+        
     }
 }

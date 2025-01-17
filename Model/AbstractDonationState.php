@@ -11,7 +11,7 @@ abstract class AbstractDonationState implements IState
     public function getStateType(){
         return $this->stateType;
     }
-    public function changeState($donation): bool
+    public function changeState($donation,$role): bool
     {
         return false; 
     }

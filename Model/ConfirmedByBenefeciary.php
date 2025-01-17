@@ -9,7 +9,7 @@ class ConfirmByBenefeciary extends AbstractDonationState
         $this->setStateType('ConfirmByBenefeciary');
         
     }
-    public function changeState($donation): bool
+    public function changeState($donation,$role): bool
     {
    
         return false; 

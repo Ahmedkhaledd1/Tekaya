@@ -20,13 +20,11 @@ class PaymentDonationController {
                 $paymentProcessor = null;
 
                 if ($paymentMethod === 'credit_card') {
-                    $cardholderName = $_POST['cardholder_name'];
                     $cardNumber = $_POST['card_number'];
-                    $expiryDate = $_POST['expiry_date'];
                     $cvv = $_POST['cvv'];
 
                     // Here, you would pass necessary credit card details to the adapter
-                    $creditCardAdaptee = new CreditCardAdaptee($cardholderName, $cardNumber, $expiryDate, $cvv);
+                    $creditCardAdaptee = new CreditCardAdaptee($cardNumber, $cvv);
                     $paymentProcessor = new CreditCardAdapter($creditCardAdaptee); 
 
                 } elseif ($paymentMethod === 'paypal') {

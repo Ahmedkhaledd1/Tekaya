@@ -29,9 +29,7 @@ class PaymentView extends View {
 
             <div id='credit_card_fields' style='display:none;'>
                 <h3>Credit Card Payment</h3>
-                <input type='text' name='cardholder_name' placeholder='Cardholder Name' required>
                 <input type='text' name='card_number' placeholder='Card Number' maxlength='16' required>
-                <input type='text' name='expiry_date' placeholder='MM/YY' maxlength='5' required>
                 <input type='text' name='cvv' placeholder='CVV' maxlength='3' required>
             </div>
             

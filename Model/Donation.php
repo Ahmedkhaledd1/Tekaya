@@ -3,6 +3,7 @@ require_once 'SubjectInterface.php';
 require_once "DBConnection.php";
 require_once "FreshMeal.php";
 require_once "FoodSet.php";
+require_once "IState.php";
 class Donation implements SubjectInterface
 
 {   private int $donationId;
@@ -12,7 +13,7 @@ class Donation implements SubjectInterface
     private AbstractUser $donor;
     private DonationStrategyInterface $strategy;
     private Volunteer $volunteer;
-    private iState $state;
+    private IState $state;
 
     public function setDelivered(bool $delivered)
     {

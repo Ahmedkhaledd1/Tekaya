@@ -25,7 +25,7 @@ class CreateDonationView extends View
         // Show Fresh Meal form
         if ($type === 'freshmeal') {
             echo "
-            <form method='POST' action='/create-donation/confirm' style='display:inline'>
+            <form method='POST' action='/createDonation/confirm' style='display:inline'>
                 <input type='hidden' name='type' value='freshmeal'>
                 <label for='expiry_date'>Expiry Date:</label>
                 <input type='date' name='expiry_date' value='{$expiryDate}'>
@@ -66,7 +66,7 @@ class CreateDonationView extends View
             }
 
             echo "
-                <form method='POST' action='/create-donation/confirm' style='display:inline'>
+                <form method='POST' action='/createDonation/confirm' style='display:inline'>
                     <button type='submit'>Confirm Donation</button>
                 </form>
             </form>";

@@ -65,7 +65,7 @@ class EditDonationView extends View {
             }
 
             echo "
-                <button type='submit' formaction='/create-donation/confirm'>Confirm Donation</button>
+                <button type='submit' formaction='/createDonation/confirm'>Confirm Donation</button>
             </form>";
         }
 

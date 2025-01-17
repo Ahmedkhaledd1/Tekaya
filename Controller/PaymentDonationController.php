@@ -1,10 +1,10 @@
 <?php
-require_once 'View/paymentView.php';
+require_once 'View/paymentDonationView.php';
 require_once 'Model\Donation.php';
 require_once 'Model\Donor.php';
-require_once 'Model\PaymentProcessor.php'; 
+require_once 'Model\IPaymentProcessor.php'; 
 require_once 'Model\CreditCardAdapter.php';
-require_once 'Model\PayPalAdapter.php';
+require_once 'Model\PaypalAdapter.php';
 
 class PaymentDonationController {
 

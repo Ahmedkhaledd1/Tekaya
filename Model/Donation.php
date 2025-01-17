@@ -20,7 +20,7 @@ class Donation implements SubjectInterface
         $this->delivered = $delivered;
     }
 
-    public function setBenefeciary(bool $benefeciary)
+    public function setBenefeciary(Benefeciary $benefeciary)
     {
         $this->benefeciary = $benefeciary;
     }
@@ -31,12 +31,12 @@ class Donation implements SubjectInterface
         $this->donor = $donor;
     }
 
-    public function setVolunteer(Donor $volunteer)
+    public function setVolunteer(volunteer $volunteer)
     {
         $this->volunteer = $volunteer;
     }
 
-    public function setState(Donor $state)
+    public function setState(IState $state)
     {
         $this->state = $state;
     }

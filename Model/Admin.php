@@ -15,13 +15,13 @@ class Admin extends AbstractIndividual
     }
     public function removeDonation(Donation $donation): bool
     {
-        $donation ->removeDonation();
+        //$donation ->removeDonation();
         return true;
     }
 
-    public function assignBeneficiary(Donation $donation, Benefeciary $beneficiary): bool
+    public function assignBeneficiary(Donation $donation, Benefeciary $benefeciary): bool
     {
-        $donation ->setBeneficiary($beneficiary);
+        $donation ->setBenefeciary($benefeciary);
         return true;
     }
     public function assignVolunteer(Donation $donation, Volunteer $volunteer): bool

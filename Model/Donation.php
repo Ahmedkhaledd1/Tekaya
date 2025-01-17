@@ -14,7 +14,15 @@ class Donation implements SubjectInterface
     private Volunteer $volunteer;
     private iState $state;
 
-    
+    public function setDelivered(bool $delivered)
+    {
+        $this->delivered = $delivered;
+    }
+
+    public function setBenefeciary(bool $benefeciary)
+    {
+        $this->benefeciary = $benefeciary;
+    }
 
 
     public function setDonor(Donor $donor)
@@ -22,22 +30,54 @@ class Donation implements SubjectInterface
         $this->donor = $donor;
     }
 
+    public function setVolunteer(Donor $volunteer)
+    {
+        $this->volunteer = $volunteer;
+    }
+
+    public function setState(Donor $state)
+    {
+        $this->state = $state;
+    }
+
     public function addObserver(ObserverInterface $ob)
     {
         array_push($this->observers, $ob);
     }
 
-    public function getStrategy()
-    {
-        return $this->strategy;
-    }
-    
+
     public function getDonationId()
     {
         return $this->donationId;
     }
-
-
+    public function getObservers()
+    {
+        return $this->observers;
+    }
+    public function getbenefeciary()
+    {
+        return $this->benefeciary;
+    }
+    public function getDelivered()
+    {
+        return $this->delivered;
+    }
+    public function getDonor()
+    {
+        return $this->donor;
+    }
+    public function getStrategy()
+    {
+        return $this->strategy;
+    }
+    public function getVolunteer()
+    {
+        return $this->volunteer;
+    }
+    public function getState()
+    {
+        return $this->state;
+    }
 
     public function removeObserver(ObserverInterface $ob)
     {

@@ -6,19 +6,10 @@ class BasicFoodSet extends FoodSet
     {
         $this->description = implode(", ", ["Rice", "Oil"]);
         $this->cost=$price;
+        $this->Paid=false;
 
     }
 
-    public function getItems(): string
-    {
-        return $this->description;
-    }
-
-    public function getCost(): int
-    {
-
-        return $this->cost;
-    }
     public function deliverToBenefeciary(Donation $donation, Benefeciary $benefeciary): bool
     {
         $currentDate = new DateTime();

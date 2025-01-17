@@ -23,8 +23,8 @@ class PaymentView extends View {
             <label>Select Payment Method:</label>
             <select name='payment_method' id='payment_method' onchange='togglePaymentFields()'>
                 <option value=''>-- Select Payment Method --</option>
-                <option value='credit_card'>Credit Card</option>
-                <option value='paypal'>PayPal</option>
+                <option value='CreditCard'>Credit Card</option>
+                <option value='Paypal'>Paypal</option>
             </select>
 
             <div id='credit_card_fields' style='display:none;'>
@@ -36,7 +36,7 @@ class PaymentView extends View {
             <div id='paypal_fields' style='display:none;'>
                 <h3>PayPal Payment</h3>
                 <input type='email' name='paypal_email' placeholder='PayPal Email' required>
-                <input type='password' name='paypal_password' placeholder='PayPal Password' required>
+                <input type='password' name='paypal_password' placeholder='Paypal Password' required>
             </div>
             
             <button type='submit'>Submit Payment</button>
@@ -49,12 +49,12 @@ class PaymentView extends View {
                 const paymentMethod = document.getElementById('payment_method').value;
                 
                 // Show Credit Card fields and hide PayPal fields
-                if (paymentMethod === 'credit_card') {
+                if (paymentMethod === 'CreditCard') {
                     document.getElementById('credit_card_fields').style.display = 'block';
                     document.getElementById('paypal_fields').style.display = 'none';
                 }
                 // Show PayPal fields and hide Credit Card fields
-                else if (paymentMethod === 'paypal') {
+                else if (paymentMethod === 'Paypal') {
                     document.getElementById('credit_card_fields').style.display = 'none';
                     document.getElementById('paypal_fields').style.display = 'block';
                 }

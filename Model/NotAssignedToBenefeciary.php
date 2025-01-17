@@ -9,7 +9,7 @@ class NotAssignedToBenefeciary extends AbstractDonationState
         $this->setStateType('NotAssignedToBenefeciary');
         
     }
-    public function changeState($donation): bool
+    public function changeState($donation,$role): bool
     {
         if ($donation->getState()->getStateType=='NotAssignedToBenefeciary') {
             // Logic to transition to the next state (e.g., 'Approved')

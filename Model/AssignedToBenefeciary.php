@@ -9,7 +9,7 @@ class AssignedToBenefeciary extends AbstractDonationState
         $this->setStateType('AssignedToBenefeciary');
         
     }
-    public function changeState($donation): bool
+    public function changeState($donation,$role): bool
     {
         if ($donation->getState()->getStateType=='AssignedToBenefeciary') {
             

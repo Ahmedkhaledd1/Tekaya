@@ -9,7 +9,7 @@ class PendingBenefeciaryConfirm extends AbstractDonationState
         $this->setStateType('PendingBenefeciaryConfirm');
         
     }
-    public function changeState($donation): bool
+    public function changeState($donation,$role): bool
     {
         if ($donation->getState()->getStateType=='PendingBenefeciaryConfirm') {
             

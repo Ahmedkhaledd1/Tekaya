@@ -9,7 +9,7 @@ class ReadyWithVolunteer extends AbstractDonationState
         $this->setStateType('ReadyWithVolunteer');
         
     }
-    public function changeState($donation): bool
+    public function changeState($donation,$role): bool
     {
         if ($donation->getState()->getStateType=='ReadyWithVolunteer') {
             

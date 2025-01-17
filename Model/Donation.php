@@ -4,21 +4,59 @@ require_once "DBConnection.php";
 require_once "FreshMeal.php";
 require_once "FoodSet.php";
 class Donation implements SubjectInterface
-{
-    private int $donationId;
+
+{   private int $donationId;
+    private array $observers = [];
+    private bool $delivered;
     private Benefeciary $benefeciary;
     private AbstractUser $donor;
     private DonationStrategyInterface $strategy;
-    private bool $confirmReceived;
-    private array $observers = [];
+    private Volunteer $volunteer;
+    private iState $state;
 
-    // public function __construct()
-    // {
-    //     $conn = DBConnection::getInstance()->getConnection();  // Get the actual database connection
-    //     $this-> donationId= $id;
-    //     $sql = "INSERT INTO address (donation_id) VALUE ('$id')"; 
-    //     $conn->query($sql);
-    // }
+    
+
+
+    public function setDonor(Donor $donor)
+    {
+        $this->donor = $donor;
+    }
+
+    public function addObserver(ObserverInterface $ob)
+    {
+        array_push($this->observers, $ob);
+    }
+
+    public function getStrategy()
+    {
+        return $this->strategy;
+    }
+    
+    public function getDonationId()
+    {
+        return $this->donationId;
+    }
+
+
+
+    public function removeObserver(ObserverInterface $ob)
+    {
+        array_pop($this->observers, $ob);
+    }
+
+    public function notifyObservers()
+    {
+        foreach ($this->observers as $ob) {
+            $ob->update($this);
+        }
+    }
+
+    public function removeStrategy(): bool
+    {
+        $this->strategy = null;
+        return true;
+    }
+
 
     public function setDonationStrategy(DonationStrategyInterface $strategy): bool
     {
@@ -57,63 +95,8 @@ class Donation implements SubjectInterface
         return false;
     }
 
-    public function removeStrategy(): bool
-    {
-        $this->strategy = null;
-        return true;
-    }
 
-    public function hasStrategy()
-    {
-        return $this->strategy;
-    }
-
-    public function excuteDonation(Benefeciary $benefeciary, FoodSet $foodset): bool
-    {
-        $this->strategy->deliverToBenefeciary($this, $benefeciary);
-        if ($this->confirmReceived) {
-            #notify observers that donation delivered successfully
-            $conn = DBConnection::getInstance()->getConnection();
-            if ($foodset != Null) {
-                $sql = "INSERT INTO address (description, cost) VALUES ('" . $foodset->getItems() . "', '" . $foodset->getCost() . "')";
-                $conn->query($sql);
-            }
-
-            return true;
-        }
-
-        return false;
-    }
-
-
-
-    public function setConfirmReceived(Benefeciary $benefeciary)
-    {
-        $this->benefeciary = $benefeciary;
-        $this->confirmReceived = true;
-    }
-
-    public function setDonor(Donor $donor)
-    {
-        $this->donor = $donor;
-    }
-
-    public function addObserver(ObserverInterface $ob)
-    {
-        array_push($this->observers, $ob);
-    }
-
-    public function removeObserver(ObserverInterface $ob)
-    {
-        array_pop($this->observers, $ob);
-    }
-
-    public function notifyObservers()
-    {
-        foreach ($this->observers as $ob) {
-            $ob->update($this);
-        }
-    }
+    
     public function getDBDonations() {
         $conn = DBConnection::getInstance()->getConnection();
         $sql = "SELECT * FROM donation";
@@ -123,18 +106,5 @@ class Donation implements SubjectInterface
         }
     }
 
-    /* public function __toString()
-    {
-    
-        if ($this->donor) {
-            return "Donation Id: ". $this->donationId ."\n email:" . $this->donor->getEmail() . "\nbenefec: " . $this->benefeciary->getEmail() . "\n strat: " . $this->strategy;
-        } else {
-            return "Donation Id: ". $this->donationId . "\n Donor not set";
-        }
-    
-    }*/
-    public function getDonationId()
-    {
-        return $this->donationId;
-    }
+
 }

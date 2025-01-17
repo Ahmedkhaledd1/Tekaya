@@ -7,7 +7,7 @@ require_once 'Model/FoodSet.php';
 require_once 'Model/Rice.php';
 require_once 'Model/Oil.php';
 require_once 'Model/Beans.php';
-
+error_reporting(E_ERROR | E_PARSE);
 class CreateDonationController
 {
     private $addons = [
@@ -25,7 +25,7 @@ class CreateDonationController
     {
         session_start();
         // Initialize session values if not set
-        if (!isset($_SESSION['donation'])) {
+        if (!isset($_SESSION['donation']) || count($_SESSION['donation']) == 0) {
             $_SESSION['donation'] = [
                 'title' => '',
                 'type' => 'freshmeal', // default type
@@ -66,6 +66,7 @@ class CreateDonationController
         // Update description and cost based on selected add-ons
         $description = $this->baseFoodSet['description'];
         $cost = $this->baseFoodSet['cost'];
+        print_r($_SESSION);
         foreach ($_SESSION['donation']['addons'] as $addon) {
             $description .= ', ' . $addon['name'];
             $cost += $addon['cost'];
@@ -78,7 +79,7 @@ class CreateDonationController
 
     public function confirmDonation()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/create-donation/confirm') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/createDonation/confirm') {
             $donation = new Donation();
             // echo "<script>console.log('{$_SESSION['donation']['expiry_date']}');</script>";
             if ($_SESSION['donation']['type'] === "freshmeal") {

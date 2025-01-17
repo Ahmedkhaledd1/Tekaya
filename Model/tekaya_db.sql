@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `address`;
 CREATE TABLE IF NOT EXISTS `address` (
   `address_id` int NOT NULL AUTO_INCREMENT,
+  `street` varchar(255) DEFAULT NULL, -- Added column
   `city` varchar(255) DEFAULT NULL,
   `state` varchar(255) DEFAULT NULL,
   `zipcode` varchar(10) DEFAULT NULL,
@@ -42,12 +43,12 @@ CREATE TABLE IF NOT EXISTS `address` (
 -- Dumping data for table `address`
 --
 
-INSERT INTO `address` (`address_id`, `city`, `state`, `zipcode`, `parent_address_id`) VALUES
-(1, 'New York', 'NY', '10001', NULL),
-(2, 'Los Angeles', 'CA', '90001', NULL),
-(3, 'Chicago', 'IL', '60601', NULL),
-(4, 'Brooklyn', 'NY', '11201', 1),
-(5, 'Beverly Hills', 'CA', '90210', 2);
+INSERT INTO `address` (`address_id`, `street`, `city`, `state`, `zipcode`, `parent_address_id`) VALUES
+(1, NULL, 'New York', 'NY', '10001', NULL),
+(2, NULL, 'Los Angeles', 'CA', '90001', NULL),
+(3, NULL, 'Chicago', 'IL', '60601', NULL),
+(4, NULL, 'Brooklyn', 'NY', '11201', 1),
+(5, NULL, 'Beverly Hills', 'CA', '90210', 2);
 
 -- --------------------------------------------------------
 
@@ -58,11 +59,11 @@ INSERT INTO `address` (`address_id`, `city`, `state`, `zipcode`, `parent_address
 DROP TABLE IF EXISTS `donation`;
 CREATE TABLE IF NOT EXISTS `donation` (
   `donation_id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
   `donor_id` int DEFAULT NULL,
   `beneficiary_id` int DEFAULT NULL,
-  `advanced` tinyint(1) DEFAULT NULL,
-  `confirmReceived` tinyint(1) DEFAULT NULL,
+  `volunteer_id` int DEFAULT NULL, -- Added column
+  `delivered` tinyint(1) DEFAULT NULL, -- Added column
+  `state` ENUM('NotAssignedToBenefeciary', 'AssignedToBenefeciary', 'ReadyWithVolunteer', 'PendingBenefeciaryConfirm', 'ConfirmedByBenefeciary') DEFAULT 'NotAssignedToBenefeciary', -- Added column
   PRIMARY KEY (`donation_id`),
   KEY `donor_id` (`donor_id`),
   KEY `beneficiary_id` (`beneficiary_id`)
@@ -72,10 +73,10 @@ CREATE TABLE IF NOT EXISTS `donation` (
 -- Dumping data for table `donation`
 --
 
-INSERT INTO `donation` (`donation_id`, `title`, `donor_id`, `beneficiary_id`, `advanced`, `confirmReceived`) VALUES
-(1, 'Food Donation for Families', 1, 2, 0, 0),
-(2, 'Emergency Food Aid', 2, 1, 1, 1),
-(3, 'Monthly Food Supply', 3, 2, 1, 0);
+INSERT INTO `donation` (`donation_id`, `donor_id`, `beneficiary_id`, `volunteer_id`, `delivered`, `state`) VALUES
+(1, 1, 2, NULL, 0, 'NotAssignedToBenefeciary'),
+(2, 2, 1, NULL, 1, 'ConfirmedByBenefeciary'),
+(3, 3, 2, NULL, 0, 'PendingBenefeciaryConfirm');
 
 -- --------------------------------------------------------
 
@@ -113,6 +114,7 @@ CREATE TABLE IF NOT EXISTS `foodset` (
   `food_set_id` int NOT NULL AUTO_INCREMENT,
   `description` text,
   `cost` decimal(10,2) NOT NULL,
+  `paid` tinyint(1) DEFAULT NULL, -- Added column
   PRIMARY KEY (`food_set_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -120,9 +122,9 @@ CREATE TABLE IF NOT EXISTS `foodset` (
 -- Dumping data for table `foodset`
 --
 
-INSERT INTO `foodset` (`food_set_id`, `description`, `cost`) VALUES
-(1, 'Basic Food Set - Rice, Meat, Oil', 15.00),
-(2, 'Deluxe Food Set - Rice, Meat, Oil, Vegetables', 25.00);
+INSERT INTO `foodset` (`food_set_id`, `description`, `cost`, `paid`) VALUES
+(1, 'Basic Food Set - Rice, Meat, Oil', 15.00, 0),
+(2, 'Deluxe Food Set - Rice, Meat, Oil, Vegetables', 25.00, 1);
 
 -- --------------------------------------------------------
 

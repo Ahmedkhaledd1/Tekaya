@@ -100,7 +100,7 @@ class Donation implements SubjectInterface
     }
 
 
-    public function setDonationStrategy(DonationStrategyInterface $strategy): bool
+    public function setDonationStrategy(DonationStrategyInterface $strategy, $donor_id): bool
     {
         $this->strategy = $strategy;
         $conn = DBConnection::getInstance()->getConnection();  // Get the actual database connection
@@ -111,7 +111,7 @@ class Donation implements SubjectInterface
             $donationId = -1;
             if (!$conn->query($sql)) return false;
             $freshmealId = $conn->insert_id;
-            $sql = "INSERT INTO donation () VALUES ()";
+            $sql = "INSERT INTO donation (donor_id) VALUES ('$donor_id')";
             if (!$conn->query($sql)) return false;
             $donationId = $conn->insert_id;
             $sql = "INSERT INTO donationdetails (donation_id, foodtype, food_item_id) VALUES ($donationId, 0, $freshmealId)";

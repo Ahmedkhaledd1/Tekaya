@@ -20,4 +20,8 @@ abstract class AbstractNotifier
     {
         return $this->user;
     }
+    public function setUser(AbstractUser $user)
+    {
+        $this->user = $user;
+    }
 }

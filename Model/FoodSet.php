@@ -21,8 +21,8 @@ abstract class FoodSet implements DonationStrategyInterface{
         return $this->paid;
     }
 
-    public function setPaid(float $cost){
-        $this->paid=$cost;
+    public function setPaid(bool $paid){
+        $this->paid=$paid;
     }
 
     

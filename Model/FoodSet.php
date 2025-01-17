@@ -5,7 +5,7 @@ abstract class FoodSet implements DonationStrategyInterface{
     protected array $basicFoodSet=[];
     protected string $description; 
     protected float $cost;
-    protected bool $Paid;
+    protected bool $paid;
 
 
 
@@ -18,11 +18,11 @@ abstract class FoodSet implements DonationStrategyInterface{
     
 
     public function isPaid():bool{
-        return $this->Paid;
+        return $this->paid;
     }
 
     public function setPaid(float $cost){
-        $this->Paid=$cost;
+        $this->paid=$cost;
     }
 
     

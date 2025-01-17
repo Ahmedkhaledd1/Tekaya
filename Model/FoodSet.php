@@ -5,7 +5,9 @@ abstract class FoodSet implements DonationStrategyInterface{
     protected array $basicFoodSet=[];
     protected string $description; 
     protected float $cost;
-    abstract public function getItems():string;
+    protected bool $Paid;
+
+
 
     public function deliverToBenefeciary(Donation $donation, Benefeciary $benefeciary): bool
     {
@@ -13,7 +15,27 @@ abstract class FoodSet implements DonationStrategyInterface{
         if ($this->expirationDate > $currentDate) return false;
         return $benefeciary->confirmReceivedDonation($donation);
     }
-    public abstract function getCost():int;
+    
+
+    public function isPaid():bool{
+        return $this->Paid;
+    }
+
+    public function setPaid(float $cost){
+        $this->Paid=$cost;
+    }
+
+    
+    public function getItems(): string
+    {
+        return $this->description;
+    }
+
+    public function getCost(): int
+    {
+
+        return $this->cost;
+    }
 
 }
 

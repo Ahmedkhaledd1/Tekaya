@@ -92,7 +92,7 @@ class Organization extends AbstractUser
     public function pay (String $type,string $email,String $password,int $cardNumber ,int $cvv,FoodSet $foodSet):bool{ 
         $this->payment=new PaymentFacade();
 
-        return $this->payment->pay($type,$email,$password,$cardNumber,$cvv,$foodSet->getCost());
+        return $this->payment->pay($type,$email,$password,$cardNumber,$cvv,$foodSet);
 
     }
 

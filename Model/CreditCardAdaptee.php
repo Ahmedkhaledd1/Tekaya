@@ -1,15 +1,11 @@
 <?php
 
 class CreditCardAdaptee {
-    private $cardholderName;
     private $cardNumber;
-    private $expiryDate;
     private $cvv;
 
-    public function __construct($cardholderName, $cardNumber, $expiryDate, $cvv) {
-        $this->cardholderName = $cardholderName;
+    public function __construct($cardNumber, $cvv) {
         $this->cardNumber = $cardNumber;
-        $this->expiryDate = $expiryDate;
         $this->cvv = $cvv;
     }
 
@@ -22,14 +18,6 @@ class CreditCardAdaptee {
         }
     }
 
-    public function getCardholderName() {
-        return $this->cardholderName;
-    }
-
-    public function setCardholderName($cardholderName) {
-        $this->cardholderName = $cardholderName;
-    }
-
     public function getCardNumber() {
         return $this->cardNumber;
     }
@@ -38,13 +26,6 @@ class CreditCardAdaptee {
         $this->cardNumber = $cardNumber;
     }
 
-    public function getExpiryDate() {
-        return $this->expiryDate;
-    }
-
-    public function setExpiryDate($expiryDate) {
-        $this->expiryDate = $expiryDate;
-    }
 
     public function getCvv() {
         return $this->cvv;

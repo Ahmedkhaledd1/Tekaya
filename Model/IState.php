@@ -1,6 +1,7 @@
 <?php
+require_once 'Donation.php';
 interface IState
 {
-    public function changeState():bool;
+    public function changeState($donation):bool;
 
 }

@@ -36,9 +36,10 @@ class Admin extends AbstractIndividual
         $this->changeDonationState($donation,$this->role);
         return true;
     }
-    public function generateReport():void
+    public function generateReport($donorId):string
     {
         //to be implemented
+        
     }
 
     public function changeDonationState(Donation $donation,$role):bool{

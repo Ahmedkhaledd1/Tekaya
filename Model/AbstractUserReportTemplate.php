@@ -6,8 +6,9 @@ abstract class AbstractUserReportTemplate
     // Template Method
     public function processReport($donorId)
     {
-        $this->generateReport(donorId:$donorId);
+        $filePath = $this->generateReport(donorId:$donorId);
         $this->saveReport();
+        return $filePath;
     }
 
     // Abstract method to be implemented by subclasses

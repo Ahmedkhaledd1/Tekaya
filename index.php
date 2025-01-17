@@ -7,6 +7,7 @@ require_once 'Controller\receivedDonationsController.php';
 require_once 'Controller\createDonationController.php';  // Adjusted the path
 require_once 'Controller\editDonationController.php';
 require_once 'Controller\PaymentDonationController.php';
+require_once 'Controller\reportController.php';
 $request = $_SERVER['REQUEST_URI'];
 $loginController = new LoginController();
 $signUpController = new SignUpController();
@@ -16,6 +17,7 @@ $receivedDonationsController = new ReceivedDonationsController();
 $donationController = new createDonationController();
 $editdonationController = new EditDonationController();
 $paymentDonationController = new PaymentDonationController();
+$reportController = new ReportController();
 switch ($request) {
     case '/':
     case '/login':
@@ -72,6 +74,10 @@ switch ($request) {
 
     case '/payment':
         $paymentDonationController->processPayment();
+        break;
+    
+    case '/adminReport':
+        $reportController->showReportGeneration();
         break;
     default:
         header("HTTP/1.0 404 Not Found");

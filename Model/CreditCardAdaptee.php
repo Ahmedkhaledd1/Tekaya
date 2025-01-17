@@ -1,8 +1,8 @@
 <?php
 
 class CreditCardAdaptee {
-    private $cardNumber;
-    private $cvv;
+    private int $cardNumber;
+    private int $cvv;
 
     public function __construct($cardNumber, $cvv) {
         $this->cardNumber = $cardNumber;

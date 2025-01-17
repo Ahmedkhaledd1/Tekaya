@@ -114,7 +114,7 @@ class View {
     public function renderFooter() {
         return "
         <footer>
-            <p>&copy; " . date("Y") . " Your Company. All rights reserved.</p>
+            <p>&copy; " . date("Y") . " Tekaya. All rights reserved.</p>
         </footer>
         </body>
         </html>";

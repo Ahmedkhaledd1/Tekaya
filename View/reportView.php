@@ -8,7 +8,7 @@ class ReportView extends View {
     }
 
     public function render($message = '') {
-        $content = $this->renderHeader();
+        $content = $this->renderNavbar($_SESSION['user_role']);
         $content .= "
         <form method='POST' action='/adminReport'>
             <h2>Report</h2>";

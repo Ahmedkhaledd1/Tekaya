@@ -23,7 +23,7 @@ class Admin extends AbstractIndividual
         return true;
     }
 
-    public function assignBeneficiary(Donation $donation, Benefeciary $benefeciary): bool
+    public function assignBenefeciary(Donation $donation, Benefeciary $benefeciary): bool
     {
         $donation ->setBenefeciary($benefeciary);
         $this->changeDonationState($donation,$this->role);

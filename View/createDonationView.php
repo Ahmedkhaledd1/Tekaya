@@ -6,7 +6,7 @@ class CreateDonationView extends View
     public function render($title, $type, $description, $cost, $addons, $expiryDate, $selectedAddons)
     {
         $this->addStyle('/css/style.css');
-        echo $this->renderHeader();
+        echo  $this->renderNavbar($_SESSION['user_role']);
 
         echo "
         <div class='container'>

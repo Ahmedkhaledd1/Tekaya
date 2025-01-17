@@ -4,7 +4,7 @@ require_once __DIR__ . '/../core/View.php';
 class SentDonationsView extends View {
     public function renderDonationList($donations) {
         // Start rendering the page with a header
-        $content = $this->renderHeader();
+        $content = $this->renderNavbar($_SESSION['user_role']);
         $content .= "<div class='container'>";
         $content .= "<h2>List of Sent Donations</h2><ul>";
 

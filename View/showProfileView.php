@@ -4,7 +4,7 @@ require_once __DIR__ . '/../core/View.php';
 class ShowProfileView extends View {
     public function renderOrganizationProfile($organizationData) {
         
-        $content = $this->renderHeader();
+        $content = $this->renderNavbar($_SESSION['user_role']);
         $content .= "
         <div class='container'>
             <h2>Your Profile</h2>
@@ -20,7 +20,7 @@ class ShowProfileView extends View {
     }
 
     public function renderIndividualProfile($individualData) {
-        $content = $this->renderHeader();
+        $content = $this->renderNavbar($_SESSION['user_role']);
         $content .= "
         <div class='container'>
             <h2>Your Profile</h2>
@@ -35,4 +35,7 @@ class ShowProfileView extends View {
         $content .= $this->renderFooter();
         return $content;
     }
+
+
+    
 }

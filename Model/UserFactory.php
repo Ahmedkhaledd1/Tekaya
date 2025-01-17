@@ -28,7 +28,7 @@ class UserFactory
 
             case 'Benefeciary':
                 $user  = new Benefeciary($args[0], $args[1], $args[2], $args[3], $args[4], $args[5], $args[6]);
-                $user->setIndividualInfo('Beneficiary');
+                $user->setIndividualInfo('Benefeciary');
                 break;
 
             case 'Admin':

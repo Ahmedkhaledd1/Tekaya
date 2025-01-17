@@ -39,6 +39,7 @@ class PaymentFacade {
             $this->payment=new CreditCardAdapter(new CreditCardAdaptee($cardNumber, $cvv));
             if($this->validator->validateCreditCard($cardNumber,$cvv)){
                 $this->payment->makePayment( $foodSet->getCost());
+                $foodSet->setPaid(true);
                 return true;
             }
             

@@ -46,7 +46,7 @@ class XMLReport extends AbstractUserReportTemplate
         }
         $root->appendChild($donationsElement);
     
-        $filePath = __DIR__ . "/UserReport_{$donorId}.xml";
+        $filePath = dirname(__DIR__) . "/UserReport_{$donorId}.xml";
     
         if ($doc->save($filePath)) {
             echo "XML report generated and saved successfully at: {$filePath}\n";
@@ -59,6 +59,3 @@ class XMLReport extends AbstractUserReportTemplate
     
     
 }
-
-$xmlReport = new XMLReport();
-$xmlReport->processReport(1);

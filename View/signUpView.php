@@ -25,7 +25,7 @@ class SignUpView extends View {
             <select name='userType' id='userType' onchange='toggleFields()' required>
                 <option value='Organization'>Organization</option>
                 <option value='Volunteer'>Volunteer</option>
-                <option value='Beneficiary'>Beneficiary</option>
+                <option value='Benefeciary'>Benefeciary</option>
                 <option value='Donor'>Donor</option>
             </select>
             

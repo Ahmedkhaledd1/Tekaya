@@ -47,7 +47,7 @@ class ProfileController {
             $_SESSION['user']=serialize($user);
             echo $view->renderIndividualProfile($userData);
         }
-        elseif($user_role=='Beneficiary') {
+        elseif($user_role=='Benefeciary') {
             $user=new Benefeciary($email,"","","","","",0);
             $user->getUserbyId($user_id);
             $user->getInvidualByID($user_id);
@@ -78,10 +78,25 @@ class ProfileController {
             ];
             $_SESSION['user']=serialize($user);
             echo $view->renderIndividualProfile($userData);
-        }
+
+        }elseif($user_role=='admin') {
+            $user=new Benefeciary($email,"","","","","",0);
+            $user->getUserbyId($user_id);
+            $user->getInvidualByID($user_id);
+            $userData = [
+                'email' => $user->getEmail(),
+                'mobile' => $user->getMobile(),
+                'usertype' => $user_role,
+                'firstName' => $user->getFirstName(),
+                'lastName' => $user->getLastName(),
+                'ssn' => $user->getSSN(),
+                'gender' => ($user->getGender() == true) ? 'Male' : 'Female',
+            ];
+            $_SESSION['user']=serialize($user);
+            echo $view->renderIndividualProfile($userData);
         
 
-      
+        }
 
 
     }

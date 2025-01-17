@@ -3,7 +3,7 @@ require_once __DIR__ . '/../core/View.php';
 
 class ReceivedDonationsView extends View {
     public function renderDonationList($donations) {
-        $content = $this->renderHeader();
+        $content = $this->renderNavbar($_SESSION['user_role']);
         $content .= "<div class='container'>";
         $content .= "<h2>List of Received Donations</h2><ul>";
 
